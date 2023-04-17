@@ -52,21 +52,368 @@
 			<section>
 				<h3>Outline</h3>
 				<ul>
-					<li>topic 1</li>
-					<li>topic 2</li>
+					<li>course organization</li>
+					<li>course overview</li>
+					<li>turbulent flows</li>
+					<li>turbulence modeling</li>
+					<li>fluid flow equations</li>
 				</ul>
 			</section>
 			<section>
 				<section>
-					<h3>topic 1</h3>
-					<p>
-						$$ a \in \mathbb{R}^{N\times M} $$
+					<h3>course organization</h3>
+				</section>
+				<section>
+					<p>workload and requirements</p>
+					<ul>
+						<li>5CP, 150h workload</li>
+						<li>13 lectures (90min), 13 exercise sessions (60min)</li>
+						<li>$150h - 13\times 2.5h = 117.5h$ self-study</li>
+						<li>written exam, 90min</li>
+						<li>expected prior knowledge
+							<ul>
+								<li>computational fluid dynamics</li>
+								<li>programming (in Python)</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+					<p>resources and communication</p>
+					<ul>
+						<li>slides and exercises available on <a
+								href="https://github.com/AndreWeiner/turbulence_modelling_lecture">GitHub</a></li>
+						<li>suggested reading list (StudIP/data)</li>
+						<li>all resources are updated weekly</li>
+						<li>lectures and exercises are recorded</li>
+						<li>technical support via <b style="color: #bd1e3b">GitHub issues</b></li>
+						<li>general communication via email, StudIP</li>
+					</ul>
+				</section>
+				<section>
+					<p>exercise time slot options</p>
+					<ol>
+						<li>Tuesdays, 4-5pm (original)</li>
+						<li>Tuesdays, 1-2pm (suggestion)</li>
+					</ol>
+				</section>
+				<section>
+					<p>lecture and exercise on April 25 (next week)</p>
+					<ol>
+						<li>recorded lecture/exercise</li>
+						<li>alternative appointments
+							<ol>
+								<li>after final lecture (July 25)</li>
+								<li>Doodle poll</li>
+							</ol>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<p>recipe for issue reporting</p>
+					<ol>
+						<li>go to the <a href="https://github.com/AndreWeiner/turbulence_modelling_lecture">Github
+								repository</a></li>
+						<li>click on <b style="color: #bd1e3b">Issues</b> (top left)</li>
+						<li>use the search to check if a similar<br> issue has been reported already</li>
+						<li>if not, open a <b style="color: #bd1e3b">New issue</b> (top left)</li>
+						<li>write the report and click on <b style="color: #bd1e3b">Submit new issue</b></li>
+					</ol>
+				</section>
+				<section>
+					<img data-src="images/example_issue.png" alt="issue">
+					<p>an issue with issues</p>
+				</section>
+				<section>
+					<p>how to report properly</p>
+					<ol>
+						<li>precise title<br><b style="color: #bd1e3b">Incorrect transport equation lecture 2 slides</b>
+						</li>
+						<li>short description<br><b style="color: #bd1e3b">Comparing the formulas between ... and ..., I
+								found an inconsistency.</b></li>
+						<li>precise problem description<br><b style="color: #bd1e3b">The formula reads ... in the
+								script and ... on the slides.</b></li>
+					</ol>
+				</section>
+				<section>
+					<p>additional (optional) tips</p>
+					<ul>
+						<li>expected behavior<br><b style="color: #bd1e3b">I expected a 3x2 tensor but got a 2x3
+								tensor.</b></li>
+						<li>suggestion for correction<br><b style="color: #bd1e3b">I believe the correct formula is
+								$\mathbf{XQ}=\mathbf{Q\Lambda}$.</b></li>
+						<li>link related issues using #issue_number<br><b style="color: #bd1e3b">The problem might be
+								related to issue #6.</b>
+						</li>
+						<li>provide details about your setup<br><b style="color: #bd1e3b">I am running Ubuntu 20.04
+								using WSL.</b></li>
+					</ul>
+					<p>see also: <a href="https://hackernoon.com/45-github-issues-dos-and-donts-dfec9ab4b612">45 Github
+							Issues Dos and Don't</a></p>
+				</section>
+			</section>
+			<section>
+				<h3>course overview</h3>
+				<p>refer to the <a href="https://github.com/AndreWeiner/turbulence_modelling_lecture">GitHub
+						repository</a></p>
+			</section>
+			<section>
+				<section>
+					<h3>turbulent flows</h3>
+				</section>
+				<section>
+					<iframe width="750" height="422" data-src="https://www.youtube-nocookie.com/embed/c8zKWaxohng"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen></iframe>
+					<p>source: F. X. Trias et al. <a href="https://www.youtube.com/watch?v=c8zKWaxohng">(link)</a></p>
+				</section>
+				<section>
+					<p>Properties of turbulent flows:</p>
+					<ol>
+						<li style="width: 750px;"></li>
+						<li style="width: 750px;"></li>
+						<li style="width: 750px;"></li>
+						<li style="width: 750px;"></li>
+						<li style="width: 750px;"></li>
+						<li style="width: 750px;"></li>
+						<li style="width: 750px;"></li>
+						<li style="width: 750px;"></li>
+						<li style="width: 750px;"></li>
+					</ol>
+					<aside class="notes">
+						<ol>
+							<li>random, chaotic (sensitive to initial conditions)</li>
+							<li>coherent structures</li>
+							<li>high ratio of inertial to viscous forces</li>
+							<li>large range of spatial and temporal scales</li>
+							<li>energy transfer across scales (energy cascade)</li>
+							<li>vorticity generation and persistence</li>
+							<li>enhanced diffusion/mixing (turbulent diffusion)</li>
+							<li>conversion of mechanical/kinetic to thermal energy (dissipation)</li>
+							<li>three-dimensionality</li>
+						</ol>
+					</aside>
+				</section>
+				<section>
+					<iframe width="750" height="422" data-src="https://www.youtube-nocookie.com/embed/e1TbkLIDWys"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen></iframe>
+					<p>source: J. H. Lee et al. <a href="https://www.youtube.com/watch?v=e1TbkLIDWys">(link)</a></p>
+					<aside class="notes">
+						<ul>
+							<li>regular mean flow velocity profile (coherence)</li>
+							<li>tripping makes experiments/simulations repeatable</li>
+							<li>range of scales increases with Reynolds number</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<div class="r-hstack items-end justify-around">
+						<iframe width="282" height="500" data-src="https://www.youtube.com/embed/-XBt0iSZ2Xg"
+							title="Laminar flow vs turbulent flow" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen></iframe>
+						<p>source: Michal Choma <a href="https://www.youtube.com/shorts/-XBt0iSZ2Xg">(link)</a></p>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>existence of critical Reynolds number</li>
+							<li>enhanced mixing</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<blockquote style="font-size: x-large; text-align: justify;">
+						Turbulence is not a well-defined problem awaiting solution but is a state of motion with
+						innumerable different facets which depend on the context in which it occurs.
+						We do not regard the state of laminar flow as a single problem; much less should turbulence be
+						thought of as a single problem. The properties of turbulence are flow
+						dependent, and therein lies the difficulty. Each turbulent flow field which is studied reveals
+						new aspects of turbulence, and we are a very long way from being able
+						to assemble a comprehensive physical description of this many-sided state of motion.
+					</blockquote>
+					<p>G. K. Batchelor in J. Fröhlich:<br> LES turbulenter Strömungen (p. 1)</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>turbulence modeling</h3>
+				</section>
+				<section>
+					<h4>Do we really need turbulence modeling?</h4>
+					<aside class="notes">
+						<ul>
+							<li>the majority of relevant flows are turbulent</li>
+							<li>the direct solution is not tractable in most cases</li>
+							<li>insufficiently resolved solutions will be qualitatively and quantitatively wrong</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<p>What do we expect from a turbulence model?</p>
+					<blockquote style="text-align: justify;">
+						... an ideal model should introduce the minimum amount of complexity while capturing the essence
+						of the relevant physics.
+					</blockquote>
+					<p>D. C. Wilcox:<br> Turbulence modeling for CFD (p. 2)</p>
+				</section>
+				<section>
+					<p>What do we expect from a turbulence model?</p>
+					<ul>
+						<li style="width: 750px;">accurate:</li>
+						<li>generalizable:</li>
+						<li>tested and validated:</li>
+						<li>efficient:</li>
+						<li>robust:</li>
+						<li>transparent:</li>
+					</ul>
+					<aside class="notes">
+						<ul>
+							<li>accurate: predict quantities of interest sufficiently accurate</li>
+							<li>generalizable: applicability to different geometries, boundary conditions, physical
+								phenomena</li>
+							<li>tested and validated: detailed comparison against high-fidelity data</li>
+							<li>efficient: predictions within a tolerable time frame, computationally tractable</li>
+							<li>robust: numerically stable, low sensitivity to mesh resolution, boundary conditions</li>
+							<li>transparent: provide interpretable results and performance</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<p>most common modeling approaches</p>
+					<ol>
+						<li>Reynolds-averaged Navier Stokes (RANS):<br><b style="color: #bd1e3b">attempt to predict mean
+								flow quantities directly</b></li>
+						<li>Large eddy simulation (LES): <br><b style="color: #bd1e3b">resolve largest scales, model
+								small scales</b></li>
+						<li>hybrid RANS-LES<br><b style="color: #bd1e3b">dedicated zones for LES and RANS</b></li>
+					</ol>
+				</section>
+				<section>
+					<iframe width="750" height="422" data-src="https://www.youtube-nocookie.com/embed/D-uQEXpdy_A"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen></iframe>
+					<p>source: Martin Petry <a href="https://www.youtube.com/watch?v=D-uQEXpdy_A">(link)</a></p>
+				</section>
+				<section>
+					<p style="padding-bottom: 400px;">modeling complexity vs. efficiency</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>fluid flow equations</h3>
+				</section>
+				<section>
+					<p>conservation of mass</p>
+					<ul>
+						<li>Cartesian coordinates
+							$$ \frac{\partial \rho}{\partial t} + \frac{\partial \rho u}{\partial x} + \frac{\partial
+							\rho v}{\partial y} + \frac{\partial \rho w}{\partial z} = 0$$
+						</li>
+						<li class="fragment">vector notation
+							$$ \frac{\partial \rho}{\partial t} + \nabla\cdot \left(\rho\mathbf{u}\right) = 0$$
+						</li>
+					</ul>
+					<p>$\mathbf{x} = (x, y, z)^T$, $\mathbf{u} = (u, v, w)^T$</p>
+				</section>
+				<section>
+					<ul>
+						<li>index notation
+							$$\frac{\partial \rho}{\partial t} + \frac{\partial \rho u_i}{\partial x_i} = 0$$
+						</li>
+						<li class="fragment">another alternative
+							$$\frac{\partial \rho}{\partial t} + \mathrm{div}(\rho\mathbf{u}) = 0$$
+						</li>
+					</ul>
+				</section>
+				<section>
+					<p>compressibility condition</p>
+					<p class="fragment">
+						$$\frac{\mathrm{D}\rho}{\mathrm{D}} = \frac{\partial \rho}{\partial t} + \mathbf{u}\cdot
+						\nabla\rho = 0$$
+					</p>
+					<p class="fragment">
+						$\begin{aligned}
+						\frac{\partial \rho}{\partial t} + \nabla\cdot \left(\rho\mathbf{u}\right) &=
+						\frac{\partial \rho}{\partial t} + \mathbf{u}\cdot\nabla\rho + \rho\nabla\cdot\mathbf{u}\\
+						&= \frac{\mathrm{D}\rho}{\mathrm{D}} + \rho\nabla\cdot\mathbf{u}
+						\end{aligned}$
+
+					</p>
+					<p class="fragment">
+						$$\rho\nabla\cdot\mathbf{u} = 0 \rightarrow \nabla\cdot\mathbf{u} = 0$$
+					</p>
+				</section>
+				<section>
+					<p>conservation of momentum
+						$$\frac{\partial \rho\mathbf{u}}{\partial t} + \nabla\cdot\left(\rho\mathbf{uu}\right) =
+						\mathbf{f}$$
+					</p>
+					<p class="fragment">
+						$$\mathbf{f} = \mathbf{f}_s + \mathbf{f}_b$$
+						external forces = surface forces + body forces
+					</p>
+				</section>
+				<section>
+					<p>surface forces
+						$$\mathbf{f}_s = \nabla\cdot \mathbf{S}$$
+					</p>
+					<p class="fragment">(total) stress tensor
+						$$\mathbf{S} = \underbrace{-p\mathbf{I}}_{\text{pressure}} +
+						\underbrace{\mathbf{\tau}}_{\text{viscous}}$$
+					</p>
+					<p class="fragment">
+						$$p=-\mathrm{tr}(\mathbf{S})$$
+					</p>
+				</section>
+				<section>
+					<p>gravitational body forces
+						$$\mathbf{f}_b = \rho\mathbf{g}$$
+					</p>
+					<p>$\mathbf{g}$ - gravitational acceleration vector</p>
+				</section>
+				<section>
+					<p>momentum equation with forces
+						$$\frac{\partial \rho\mathbf{u}}{\partial t} + \nabla\cdot\left(\rho\mathbf{uu}\right) = -\nabla
+						p + \nabla\cdot\mathbf{\tau} + \rho\mathbf{g}$$
+					</p>
+				</section>
+				<section>
+					<p>Newtonian fluids
+						$$\mathbf{\tau} = \mu \underbrace{\left(\nabla\mathbf{u} +
+						(\nabla\mathbf{u})^T\right)}_{\text{strain rate}} + \lambda (\nabla\cdot \mathbf{u})\mathbf{I}$$
+					</p>
+					<p>$\mu$ - dynamic viscosity, $\lambda = -2/3\mu$ - bulk viscosity</p>
+				</section>
+				<section>
+					<p>final (incompressible) form
+						$$\frac{\partial \rho\mathbf{u}}{\partial t} + \nabla\cdot\left(\rho\mathbf{uu}\right) = -\nabla
+						p + \nabla\cdot \left[\mu \left(\nabla\mathbf{u} + (\nabla\mathbf{u})^T\right)\right] +
+						\rho\mathbf{g}$$
+					</p>
+					<p class="fragment">constant density
+						$$\frac{\partial \mathbf{u}}{\partial t} + \nabla\cdot\left(\mathbf{uu}\right) = -\nabla
+						\tilde{p} + \nabla\cdot \left[\nu \left(\nabla\mathbf{u} + (\nabla\mathbf{u})^T\right)\right] +
+						\mathbf{g}$$
+						$\tilde{p} = p/\rho$ - kinematic pressure, $\nu = \mu/\rho$ - kinematic viscosity
 					</p>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h3>summary</h3>
+				</section>
+				<section>
+					<ul>
+						<li>turbulence is hard to define</li>
+						<li>the resolution of all turbulent scales is typically infeasible or impossible</li>
+						<li>modeling of turbulence is essential for most applications</li>
+						<li>good turbulence models capture the essential physics with a minimum of complexity</li>
+						<li>the most common modeling approaches are RANS, LES, hybrid RANS-LES</li>
+					</ul>
 				</section>
 			</section>
 		</div>
