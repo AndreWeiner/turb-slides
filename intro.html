@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Introduction and course overview</title>
+
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="plugin/chalkboard/style.css">
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h3>Fundamentals of turbulence modeling - <span style="color: #bd1e3b">introduction</span></h3>
+				<div class="r-hstack">
+					<img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="CC" style="padding-right: 0.5em;">
+					<a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+				</div>
+				<p>Andre Weiner, Institute of Fluid Mechanics</p>
+
+				<div class="r-hstack">
+					<img src="images/tubs_logo.png" alt="TUBS-logo" style="height: 150px;">
+					<table>
+						<tr>
+							<td>&#9993;</th>
+							<td><a href="mailto:andre.weiner@yahoo.de">Mail</a></th>
+							<td>&#9741;</td>
+							<td><a href="https://www.linkedin.com/in/andre-weiner-a79752133/">LinkedIn</a></td>
+						</tr>
+						<tr>
+							<td>&#9997;</td>
+							<td><a href="https://ml-cfd.com/">Blog</a>
+							</td>
+							<td>&#10026;</td>
+							<td><a href="https://github.com/AndreWeiner">Github</a></td>
+						</tr>
+					</table>
+				</div>
+			</section>
+			<section>
+				<h3>Outline</h3>
+				<ul>
+					<li>topic 1</li>
+					<li>topic 2</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h3>topic 1</h3>
+					<p>
+						$$ a \in \mathbb{R}^{N\times M} $$
+					</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>summary</h3>
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script src="plugin/math/math.js"></script>
+	<script src="plugin/chalkboard/plugin.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
+			progress: true,
+			slideNumber: "c",
+			chalkboard: {
+				boardmarkerWidth: 4,
+				chalkWidth: 4,
+				chalkEffect: 0.01,
+				theme: "chalkboard",
+				background: ['rgba(127,127,127,.1)', path + 'img/blackboard.png'],
+				grid: { color: 'rgb(50,50,10,0.5)', distance: 80, width: 2 },
+				eraser: { src: path + 'img/sponge.png', radius: 20 },
+				boardmarkers: [
+					{ color: 'rgba(255,255,255,1)', cursor: 'url(' + path + 'img/boardmarker-black.png), auto' },
+					{ color: 'rgba(30,144,255, 1)', cursor: 'url(' + path + 'img/boardmarker-blue.png), auto' },
+					{ color: 'rgba(220,20,60,1)', cursor: 'url(' + path + 'img/boardmarker-red.png), auto' },
+					{ color: 'rgba(50,205,50,1)', cursor: 'url(' + path + 'img/boardmarker-green.png), auto' },
+					{ color: 'rgba(255,140,0,1)', cursor: 'url(' + path + 'img/boardmarker-orange.png), auto' },
+					{ color: 'rgba(150,0,20150,1)', cursor: 'url(' + path + 'img/boardmarker-purple.png), auto' },
+					{ color: 'rgba(255,220,0,1)', cursor: 'url(' + path + 'img/boardmarker-yellow.png), auto' }
+				],
+				chalks: [
+					{ color: 'rgba(255,255,255, 0.5)', cursor: 'url(' + path + 'img/chalk-white.png), auto' },
+					{ color: 'rgba(96, 154, 244, 0.5)', cursor: 'url(' + path + 'img/chalk-blue.png), auto' },
+					{ color: 'rgba(237, 20, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-red.png), auto' },
+					{ color: 'rgba(20, 237, 28, 0.5)', cursor: 'url(' + path + 'img/chalk-green.png), auto' },
+					{ color: 'rgba(220, 133, 41, 0.5)', cursor: 'url(' + path + 'img/chalk-orange.png), auto' },
+					{ color: 'rgba(220,0,220,0.5)', cursor: 'url(' + path + 'img/chalk-purple.png), auto' },
+					{ color: 'rgba(255,220,0,0.5)', cursor: 'url(' + path + 'img/chalk-yellow.png), auto' }
+				],
+			},
+			customcontrols: {
+				controls: [
+					{
+						icon: '<i class="fa fa-pencil-square" style="font-size:36px"></i>',
+						title: 'Toggle chalkboard (B)',
+						action: 'RevealChalkboard.toggleChalkboard();'
+					},
+					{
+						icon: '<i class="fa fa-pencil" style="font-size:36px"></i>',
+						title: 'Toggle notes canvas (C)',
+						action: 'RevealChalkboard.toggleNotesCanvas();'
+					}
+				]
+			},
+
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealHighlight, RevealNotes, RevealMath, RevealChalkboard, RevealCustomControls]
+		});
+	</script>
+	<style type="text/css">
+		.reveal .slide-number {
+			font-size: 1em;
+			color: #42affa;
+			right: auto;
+			width: 1.5em;
+			height: 1.5em;
+			background-color: #191919;
+			display: grid !important;
+			place-items: center;
+		}
+	</style>
+</body>
+
+</html>
