@@ -332,7 +332,7 @@
 				<section>
 					<p>compressibility condition</p>
 					<p class="fragment">
-						$$\frac{\mathrm{D}\rho}{\mathrm{D}} = \frac{\partial \rho}{\partial t} + \mathbf{u}\cdot
+						$$\frac{\mathrm{D}\rho}{\mathrm{D}t} = \frac{\partial \rho}{\partial t} + \mathbf{u}\cdot
 						\nabla\rho = 0$$
 					</p>
 					<p class="fragment">
@@ -389,15 +389,15 @@
 					<p>$\mu$ - dynamic viscosity, $\lambda = -2/3\mu$ - bulk viscosity</p>
 				</section>
 				<section>
-					<p>final (incompressible) form
-						$$\frac{\partial \rho\mathbf{u}}{\partial t} + \nabla\cdot\left(\rho\mathbf{uu}\right) = -\nabla
+					<p>final (incompressible) form<br>
+						<small>$$\frac{\partial \rho\mathbf{u}}{\partial t} + \nabla\cdot\left(\rho\mathbf{uu}\right) = -\nabla
 						p + \nabla\cdot \left[\mu \left(\nabla\mathbf{u} + (\nabla\mathbf{u})^T\right)\right] +
-						\rho\mathbf{g}$$
+						\rho\mathbf{g}$$</small>
 					</p>
-					<p class="fragment">constant density
-						$$\frac{\partial \mathbf{u}}{\partial t} + \nabla\cdot\left(\mathbf{uu}\right) = -\nabla
+					<p class="fragment">constant density<br>
+						<small>$$\frac{\partial \mathbf{u}}{\partial t} + \nabla\cdot\left(\mathbf{uu}\right) = -\nabla
 						\tilde{p} + \nabla\cdot \left[\nu \left(\nabla\mathbf{u} + (\nabla\mathbf{u})^T\right)\right] +
-						\mathbf{g}$$
+						\mathbf{g}$$</small><br>
 						$\tilde{p} = p/\rho$ - kinematic pressure, $\nu = \mu/\rho$ - kinematic viscosity
 					</p>
 				</section>
@@ -409,8 +409,8 @@
 				<section>
 					<ul>
 						<li>turbulence is hard to define</li>
-						<li>the resolution of all turbulent scales is typically infeasible or impossible</li>
-						<li>modeling of turbulence is essential for most applications</li>
+						<li>the resolution of all turbulent scales is typically infeasible or impossible (and not wanted)</li>
+						<li>the modeling of turbulence is essential for most applications of interest</li>
 						<li>good turbulence models capture the essential physics with a minimum of complexity</li>
 						<li>the most common modeling approaches are RANS, LES, hybrid RANS-LES</li>
 					</ul>
