@@ -52,21 +52,188 @@
 			<section>
 				<h3>Outline</h3>
 				<ul>
-					<li>topic 1</li>
-					<li>topic 2</li>
+					<li>time averaging and Reynolds decomposition</li>
+					<li>assumptions for non-stationary flows</li>
+					<li>mean transport of a passive scalar</li>
+					<li>mean transport of mass and momentum</li>
 				</ul>
 			</section>
 			<section>
 				<section>
-					<h3>topic 1</h3>
+					<h3>time averaging and Reynolds decomposition</h3>
+				</section>
+				<section>
+					<p>time average generic variable $\varphi$</p>
 					<p>
-						$$ a \in \mathbb{R}^{N\times M} $$
+						$$
+						  \overline{\varphi}(\mathbf{x}) = \underset{T\rightarrow\infty}{\mathrm{lim}} \frac{1}{T}\int\limits_{t_0}^{t_0 + T} \varphi (\mathbf{x},t)\mathrm{d}t
+						$$
 					</p>
+					<p>only sensible for <span style="color: #bd1e3b;">statistically stationary flows</span></p>
+				</section>
+				<section>
+					<p>Reynolds decomposition</p>
+					<p>
+						$$
+						  \varphi(\mathbf{x},t) = \overline{\varphi}(\mathbf{x}) + \varphi^\prime(\mathbf{x},t)
+						$$
+					</p>
+					<p>introduced by <a href="https://en.wikipedia.org/wiki/Osborne_Reynolds">Osborne Reynolds</a> in 1895</p>
+				</section>
+				<section>
+					<p>time average of Reynolds decomposition</p>
+					<p>
+						\begin{aligned}
+						  \overline{\varphi}(\mathbf{x}) &= \underset{T\rightarrow\infty}{\mathrm{lim}} \frac{1}{T}\int\limits_{t_0}^{t_0 + T} \left[\overline{\varphi}(\mathbf{x}) + \varphi^\prime(\mathbf{x},t)\right]\mathrm{d}t\\
+						  \overline{\varphi}(\mathbf{x}) &= \overline{\varphi}(\mathbf{x}) + \underset{T\rightarrow\infty}{\mathrm{lim}} \frac{1}{T}\int\limits_{t_0}^{t_0 + T} \varphi^\prime(\mathbf{x},t)\mathrm{d}t
+						\end{aligned}
+					</p>
+				</section>
+				<section>
+					<p>time averaged fluctuations are zero</p>
+					<p>
+						$$
+						  \overline{\varphi^\prime} = \underset{T\rightarrow\infty}{\mathrm{lim}} \frac{1}{T}\int\limits_{t_0}^{t_0 + T} \varphi^\prime(\mathbf{x},t)\mathrm{d}t = 0
+						$$
+					</p>
+					<p class="fragment">
+						averaging twice has no effect
+						$$
+						  \overline{\overline{\varphi}} = \overline{\varphi}
+						$$
+					</p>
+				</section>
+				<section>
+					<p>time average of sum</p>
+					<p>
+						\begin{aligned}
+						  \overline{\varphi + \psi} &= \overline{\overline{\varphi}+\varphi^\prime + \overline{\psi} + \psi^\prime}\\
+						  &= \overline{\overline{\varphi}} + \overline{\varphi^\prime} + \overline{\overline{\psi}} + \overline{\psi^\prime}\\
+						  &= \overline{\varphi} + \overline{\psi}
+						\end{aligned}
+					</p>
+					<p>equals the sum of time averages</p>
+				</section>
+				<section>
+					<p>time average of product $\overline{\varphi}\psi^\prime$</p>
+					<p>
+						$$
+						  \overline{\overline{\varphi}\psi^\prime} = \overline{\overline{\varphi}} + \overline{\psi^\prime} = 0
+						$$
+					</p>
+				</section>
+				<section>
+					<p>time average of product $\varphi\psi$</p>
+					<p>
+						\begin{aligned}
+						  \overline{\varphi \psi} &= \overline{(\overline{\varphi}+\varphi^\prime) (\overline{\psi} + \psi^\prime)}\\
+						  &= \overline{\overline{\varphi}\overline{\psi}} + \overline{\varphi^\prime\overline{\psi}} + \overline{\overline{\varphi}\psi^\prime} + \overline{\varphi^\prime\psi^\prime}\\
+						  &= \overline{\varphi}\overline{\psi} + \overline{\varphi^\prime\psi^\prime}
+						\end{aligned}
+					</p>
+				</section>
+				<section>
+					<p>time average and spatial derivative</p>
+					<p>
+						\begin{aligned}
+						  \overline{\partial_s \varphi} &= \underset{T\rightarrow\infty}{\mathrm{lim}} \frac{1}{T}\int\limits_{t_0}^{t_0 + T} \partial_s\varphi(s,t)\mathrm{d}t\\
+						  &= \partial_s \left(\underset{T\rightarrow\infty}{\mathrm{lim}} \frac{1}{T}\int\limits_{t_0}^{t_0 + T} \varphi(s,t)\mathrm{d}t\right)\\
+						  &= \partial_s \overline{\varphi}
+						\end{aligned}
+					</p>
+					<p>are commutative</p>
+				</section>
+				<section>
+					<p>time average of time derivative</p>
+					<p>
+						\begin{aligned}
+						&\underset{T\rightarrow\infty}{\mathrm{lim}} \frac{1}{T}\int\limits_{t_0}^{t_0 + T} \partial_t\varphi (\mathbf{x},t)\mathrm{d}t =\dots\\
+						&\dots\underset{T\rightarrow\infty}{\mathrm{lim}} \frac{1}{T}\left(\varphi (\mathbf{x},t_0+T)-\varphi (\mathbf{x},t_0)\right) \\
+						&=0
+						\end{aligned}
+					</p>
+					<p>for finite $\varphi$</p>
+				</section>
+				<section>
+					<p>vectorial notation</p>
+					<p>
+						$$
+						  \boldsymbol{\varphi}(\mathbf{x},t) = \overline{\boldsymbol{\varphi}}(\mathbf{x}) + \boldsymbol{\varphi}^\prime (\mathbf{x},t)
+						$$
+					</p>
+				</section>
+				<section>
+					<p>time average of divergence operator</p>
+					<p>
+						\begin{aligned}
+						  \overline{\nabla\cdot\boldsymbol{\varphi}} &= \overline{\nabla\cdot(\overline{\boldsymbol{\varphi}} + \boldsymbol{\varphi}^\prime)}\\
+						  &= \nabla\cdot\overline{(\overline{\boldsymbol{\varphi}} + \boldsymbol{\varphi}^\prime)}\\
+						  &= \nabla\cdot\overline{\boldsymbol{\varphi}}
+						\end{aligned}
+					</p>
+					<p>equals the divergence of the time average</p>
+				</section>
+				<section>
+					<p>time average of Laplace operator</p>
+					<p>
+						\begin{aligned}
+						  \overline{\nabla\cdot\nabla\boldsymbol{\varphi}} &= \overline{\nabla\cdot\nabla(\overline{\boldsymbol{\varphi}} + \boldsymbol{\varphi}^\prime)}\\
+						  &= \nabla\cdot\nabla\overline{(\overline{\boldsymbol{\varphi}} + \boldsymbol{\varphi}^\prime)}\\
+						  &= \nabla\cdot\nabla\overline{\boldsymbol{\varphi}}
+						\end{aligned}
+					</p>
+					<p>equals the Laplace of the time average</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>assumptions for non-stationary flows</h3>
+				</section>
+				<section>
+					<p style="padding-bottom: 400px;">separation of time scales <span style="color: #bd1e3b;">$T_1\ll T \ll T_2$</span></p>
+					<p><span style="color: #bd1e3b;">assumption not always fulfilled</span></p>
+
+				</section>
+				<section>
+					<p>time average of time derivative</p>
+					<p>
+						\begin{aligned}
+						\frac{1}{T}\int\limits_{t_0}^{t_0 + T} \partial_t\varphi (\mathbf{x},t)\mathrm{d}t &= \frac{1}{T}\int\limits_{t_0}^{t_0 + T} \partial_t(\overline{\varphi} (\mathbf{x},t) + \varphi^\prime(\mathbf{x},t))\mathrm{d}t\\
+						&=\frac{1}{T}\left[\overline{\varphi} (\mathbf{x},t_0+T)-\overline{\varphi} (\mathbf{x},t_0) + \dots\right.\\
+						&\dots\left. \varphi^\prime (\mathbf{x},t_0+T)-\varphi^\prime (\mathbf{x},t_0)\right] \\
+						\end{aligned}
+					</p>
+					<p>if <span style="color: #bd1e3b;">$|\overline{\varphi}| \gg |\varphi^\prime|$</span> $\rightarrow$ $\overline{\partial_t \varphi} \approx \partial_t \overline{\varphi}$</p>
+				</section>
+				<section>
+					<p>correlation between mean and fluctuation</p>
+					<p>
+						$$
+						  \overline{\overline{\varphi}\varphi^\prime} := 0
+						$$
+					</p>
+					<p>true only if <span style="color: #bd1e3b;">$\overline{\varphi}$ and $\varphi^\prime$ uncorrelated</span></p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>mean transport of a passive scalar</h3>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>mean transport of mass and momentum</h3>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h3>summary</h3>
+					<ul>
+						<li>transport equations for mean quantities</li>
+						<li>additional, unclosed turbulent diffusion</li>
+						<li>time varying mean flow with multiple<br> questionable assumptions</li>
+						<li>some transport equations were not covered</li>
+					</ul>
 				</section>
 			</section>
 		</div>
