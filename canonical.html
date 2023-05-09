@@ -52,21 +52,211 @@
 			<section>
 				<h3>Outline</h3>
 				<ul>
-					<li>topic 1</li>
-					<li>topic 2</li>
+					<li>canonical flows</li>
+					<li>Reynolds stresses</li>
+					<li>Reynolds stress transport</li>
 				</ul>
 			</section>
 			<section>
 				<section>
-					<h3>topic 1</h3>
+					<h3>Canonical flows</h3>
+				</section>
+				<section>
+					<iframe width="750" height="422" data-src="https://www.youtube-nocookie.com/embed/e1TbkLIDWys"
+						title="YouTube video player" frameborder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowfullscreen></iframe>
+					<p>source: J. H. Lee et al. <a href="https://www.youtube.com/watch?v=e1TbkLIDWys">(link)</a></p>
+					<aside class="notes">
+						<ul>
+							<li>regular mean flow velocity profile (coherence)</li>
+							<li>tripping makes experiments/simulations repeatable</li>
+							<li>range of scales increases with Reynolds number</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<div class="r-hstack items-end justify-around">
+						<iframe width="282" height="500" data-src="https://www.youtube.com/embed/-XBt0iSZ2Xg"
+							title="Laminar flow vs turbulent flow" frameborder="0"
+							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+							allowfullscreen></iframe>
+						<p>source: Michal Choma <a href="https://www.youtube.com/shorts/-XBt0iSZ2Xg">(link)</a></p>
+					</div>
+					<aside class="notes">
+						<ul>
+							<li>existence of critical Reynolds number</li>
+							<li>enhanced mixing</li>
+						</ul>
+					</aside>
+				</section>
+				<section>
+					<p>typical canonical flows</p>
+					<ul>
+						<li>free shear flows
+							<ul>
+								<li>round jet</li>
+								<li>mixing layer</li>
+								<li>wake</li>
+							</ul>
+						</li>
+						<li>wall flows
+							<ul>
+								<li>flat plate boundary layer</li>
+								<li>pipe flow</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
 					<p>
-						$$ a \in \mathbb{R}^{N\times M} $$
+						Why do we study canonical flows?
 					</p>
+					<ul>
+						<li>reduced complexity</li>
+						<li>superposition as approximation of <br>more complex flows</li>
+						<li>guidance for turbulence modeling</li>
+						<li>model validation</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Reynolds stresses</h3>
+				</section>
+				<section>
+					<p>conservation of mass</p>
+					<p>
+						$\nabla\cdot \overline{\mathbf{u}} = 0$ and $\nabla\cdot \mathbf{u}^\prime = 0$
+					</p>
+					<p>in index notation</p>
+					<p>$\partial_i \overline{u}_i = 0$ and $\partial_i u^\prime_i = 0$</p>
+					<p>$\rightarrow$ try to spell this out in Cartesian coordinates</p>
+				</section>
+				<section>
+					<p>conservation of momentum</p>
+					<p>
+						$$
+							\nabla\cdot\left(\overline{\mathbf{u}}\overline{\mathbf{u}}\right) = -\nabla \overline{\mathbf{p}} +
+							\nabla\cdot\left[\nu\left(\nabla\overline{\mathbf{u}} + \nabla \overline{\mathbf{u}}^T\right) -\overline{\mathbf{u}^\prime \mathbf{u}^\prime}\right]
+						$$
+					</p>
+					<p>in index notation</p>
+					<p>
+						$$
+							\partial_i(\overline{u}_i\overline{u}_j) = -\partial_j \overline{p} +
+							\partial_i\left[ \nu \left(\partial_iu_j + \partial_j u_i\right) - \overline{u_iu_j}\right]
+						$$
+					</p>
+					<p>$\rightarrow$ try to spell this out in Cartesian coordinates</p>
+				</section>
+				<section>
+					<p>Reynolds stress tensor</p>
+					<p>
+						$$
+						\begin{pmatrix}
+						\overline{u^\prime_xu^\prime_x} & \overline{u^\prime_xu^\prime_y} & \overline{u^\prime_xu^\prime_z}\\
+						\overline{u^\prime_yu^\prime_x} & \overline{u^\prime_yu^\prime_y} & \overline{u^\prime_yu^\prime_z}\\
+						\overline{u^\prime_zu^\prime_x} & \overline{u^\prime_zu^\prime_y} & \overline{u^\prime_zu^\prime_z}
+						\end{pmatrix}
+						$$
+					</p>
+				</section>
+				<section>
+					<p>mathematical properties</p>
+					<ul>
+						<li>symmetry: $\overline{u^\prime_iu^\prime_j} = \overline{u^\prime_ju^\prime_i}$</li>
+						<li>$\overline{u^{\prime^2}_i}$ always positive</li>
+						<li><a href="https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality">Cauchy-Schwarz inequality:</a><br>
+							$|\overline{u^\prime_iu^\prime_j}|^2\leq \overline{u^{\prime^2}_i}\ \overline{u^{\prime^2}_j}$ (no summation)
+						</li>
+					</ul>
+				</section>
+				<section>
+					<p>Valid Reynolds stress tensor?</p>
+					<p>
+						$$
+						\begin{pmatrix}
+						0.5 & 0.1 & 0.0\\
+						0.1 & 0.3 & 0.1\\
+						0.0 & 0.1 & -0.1
+						\end{pmatrix}
+						$$
+					</p>
+				</section>
+				<section>
+					<p>Valid Reynolds stress tensor?</p>
+					<p>
+						$$
+						\begin{pmatrix}
+						0.21 & -0.05 & 0.01\\
+						-0.06 & 0.5 & 0.0\\
+						0.01 & 0.0 & 1.0
+						\end{pmatrix}
+						$$
+					</p>
+				</section>
+				<section>
+					<p>Valid Reynolds stress tensor?</p>
+					<p>
+						$$
+						\begin{pmatrix}
+						1.0 & 1.2 & -0.2\\
+						1.2 & 1.0 & 0.0\\
+						-0.2 & 0.0 & 1.0
+						\end{pmatrix}
+						$$
+					</p>
+				</section>
+				<section>
+					<p>statistically two-dimensional flow</p>
+					<p>
+						$$
+						\begin{pmatrix}
+						\overline{u^\prime_xu^\prime_x} & \overline{u^\prime_xu^\prime_y} & \overline{u^\prime_xu^\prime_z}\\
+						\overline{u^\prime_yu^\prime_x} & \overline{u^\prime_yu^\prime_y} & \overline{u^\prime_yu^\prime_z}\\
+						\overline{u^\prime_zu^\prime_x} & \overline{u^\prime_zu^\prime_y} & \overline{u^\prime_zu^\prime_z}
+						\end{pmatrix}
+						$$
+					</p>
+					<p>assumption: $\overline{u}_z = 0$, uncorrelated fluctuations</p>
+				</section>
+				<section>
+					<p>closure problem</p>
+					<ul>
+						<li>unknown: $\overline{u}_i$, $\overline{p}$, $\overline{u^\prime_iu^\prime_j}$ (10)</li>
+						<li>equations: momentum (3) + pressure (1)</li>
+					</ul>
+					<p>$\rightarrow$ Reynolds stresses need to be modeled by additional transport equations or algebraic relations</p>
+				</section>
+				<section>
+					<p>Idea: can we model $$\overline{u^\prime_iu^\prime_j} = f(\overline{S}_{ij}, ...)$$?</p>
+					<p>mean strain rate tensor<br> $\overline{S}_{ij} = \frac{1}{2}(\partial_i \overline{u}_j + \partial_j \overline{u}_i)$</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Reynolds stress transport equations</h3>
+				</section>
+				<section>
+					<p>approach to derive equations (Wilcox p. 41)</p>
+					<p>
+						$$ \overline{u^\prime_i N(u_j) + u^\prime_j N(u_i)} = 0$$
+					</p>
+					<p>
+						$$N(u_i) = \partial_t u_j + \partial_i (u_iu_j) + \partial_j p - \partial_i (\nu (\partial_i u_j + \partial_j u_i)) = 0$$
+					</p>
+					<p>$\rightarrow$ 6 additional transport equations for $\overline{u^\prime_iu^\prime_j}$</p>
+					<p>22 additional unknowns</p>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h3>summary</h3>
+					<ul>
+						<li>canonical flows are essential for turbulence modeling</li>
+						<li>we can't eliminate physical complexity by mathematical transformations</li>
+					</ul>
 				</section>
 			</section>
 		</div>
