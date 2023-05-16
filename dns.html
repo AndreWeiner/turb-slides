@@ -52,16 +52,182 @@
 			<section>
 				<h3>Outline</h3>
 				<ul>
-					<li>topic 1</li>
-					<li>topic 2</li>
+					<li>direct numerical simulations</li>
+					<li>numerical techniques</li>
+					<li>resolution requirements</li>
 				</ul>
 			</section>
 			<section>
 				<section>
-					<h3>topic 1</h3>
+					<h3>direct numerical simulations</h3>
+				</section>
+				<section>
+					<p><b>direct numerical simulation:</b> direct solution of the Navier-Stokes equations <span style="color: #bd1e3b;">without turbulence modeling</span> (in the turbulent flow regime).
+						Typically, (almost) <span style="color: #bd1e3b;">all spatial and temporal scales are resolved</span></p>
+				</section>
+				<section>
+					<p>reasons for performing DNS</p>
+					<ul>
+						<li>analysis of otherwise inaccessible data</li>
+						<li>physical insights into unknown flows</li>
+						<li>guidance for turbulence modeling</li>
+						<li>validation of turbulence models</li>
+						<li>test and validation of experimental techniques</li>
+					</ul>
+				</section>
+				<section>
+					<p>challenges of DNS</p>
+					<ul>
+						<li>high computational cost</li>
+						<li>limited $Re$ and physical modeling</li>
+						<li>stability issues</li>
+						<li>challenging data management and analysis</li>
+						<li>highly specialized (unique) tool chain</li>
+					</ul>
+				</section>
+			</section>
+			
+			<section>
+				<section>
+					<h3>numerical techniques</h3>
+				</section>
+				<section>
+					<p>DNS flow solvers are highly specialized and often unique.</p>
+				</section>
+				<section>
+					<p>considerations</p>
+					<ul>
+						<li>accuracy (convergence order)</li>
+						<li>stability</li>
+						<li>complexity
+							<ul>
+								<li>implementation</li>
+								<li>setup (geometry, BC, ...)</li>
+							</ul>
+						</li>
+						<li>scalability (parallelization)</li>
+						<li>...</li>
+					</ul>
+				</section>
+				<section>
+					<p><b>finite difference method:</b> approximation of partial derivatives based on Taylor series</p>
+					<ul>
+						<li>higher-order possible</li>
+						<li>no inherent conservation/boundedness</li>
+						<li>very easy to implement</li>
+						<li>limited to simple geometries</li>
+						<li>moderate scaling</li>
+					</ul>
+					<p>$\rightarrow$ sometimes used for DNS</p>
+				</section>
+				<section>
+					<p><b>finite volume method:</b> divergence theorem and Taylor series approximations</p>
+					<ul>
+						<li>limited to first/second order</li>
+						<li>inherently conservative, often bounded</li>
+						<li>relatively easy to implement</li>
+						<li>complex geometries (meshing moderate)</li>
+						<li>moderate scaling</li>
+					</ul>
+					<p>$\rightarrow$ rarely used for DNS</p>
+				</section>
+				<section>
+					<p><b>spectral method:</b> global basis basis functions substituted in PDE; optimization of coefficients</p>
+					<ul>
+						<li>higher-order accuracy</li>
+						<li>no inherent conservation/boundedness</li>
+						<li>moderate complexity</li>
+						<li>very limited geometry/Bcs</li>
+						<li>good scalability</li>
+					</ul>
+					<p>$\rightarrow$ initial go-to method for DNS</p>
+				</section>
+				<section>
+					<p><b>spectral element method:</b> similar to spectral method but with local basis functions</p>
+					<ul>
+						<li>higher-order accuracy</li>
+						<li>no inherent conservation/boundedness</li>
+						<li>high complexity</li>
+						<li>moderately complex geometries</li>
+						<li>good scalability</li>
+					</ul>
+					<p>$\rightarrow$ reasonable choice for DNS</p>
+				</section>
+				<section>
+					<p><b>discontinuous Galerkin method:</b> local, non-continuous basis functions</p>
+					<ul>
+						<li>higher-order accuracy</li>
+						<li>conservative, shock handling</li>
+						<li>high complexity (inter-element coupling)</li>
+						<li>moderately complex geometries</li>
+						<li>good scalability</li>
+					</ul>
+					<p>$\rightarrow$ reasonable choice for DNS</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>resolution requirements</h3>
+				</section>
+				<section>
+					<p>strategy</p>
+					<ol>
+						<li>determine size of smallest scales $\eta$, $u_\eta$, $t_\eta$</li>
+						<li>estimate largest scales $l_0$, $u_0$, $t_0$</li>
+						<li>infer resolution requirements</li>
+					</ol>
+				</section>
+				<section>
+					<p>Kolmogorov hypotheses (assuming large $Re$)</p>
+					<ol>
+						<li><span style="color: #bd1e3b;">local isotropy:</span> small scale motions $l\ll l_0$ are statistically isotropic</li>
+						<li><span style="color: #bd1e3b;">dynamic equilibrium:</span> statistics of small scale motion determined by viscosity $\nu$ and dissipation of turbulent energy $\varepsilon$</li>
+						<li><span style="color:#bd1e3b">inertial subrange:</span> motion of scales $\eta \ll l \ll l_0$ determined only by $\varepsilon$</li>
+					</ol>
+				</section>
+				<section>
+					<p>Kolmogorov scales</p>
+					<ol>
+						<li>$\eta = (\nu^3/\varepsilon)^{1/4}$</li>
+						<li>$u_\eta = (\varepsilon \nu)^{1/4}$</li>
+						<li>$t_\eta = (\nu/\varepsilon)^{1/2}$</li>
+					</ol>
+					<p>only based on dimensionality analysis</p>
+				</section>
+				<section>
+					<p>estimate for dissipation</p>
 					<p>
-						$$ a \in \mathbb{R}^{N\times M} $$
+						$$
+							\varepsilon \approx \frac{u_0^3}{l_0}
+						$$
 					</p>
+				</section>
+				<section>
+					<p>ratio of larges to smallest scales</p>
+					<ol>
+						<li>$\eta/l_0 \approx Re^{-3/4}$</li>
+						<li>$u_\eta / u_0 \approx Re^{-1/4}$</li>
+						<li>$t_\eta / t_0 \approx Re^{-1/2}$</li>
+					</ol>
+					<p><span style="color: #bd1e3b;">very rough estimate</span></p>
+				</section>
+				<section>
+					<p>estimate for computational cost</p>
+					<ol>
+						<li>resolve smallest scales (Kolmogorov)</li>
+						<li>at least one duration of largest time scale</li>
+					</ol>
+					<p>doubling $Re$ yields roughly <span style="color: #bd1e3b;">$8\times$</span> comp. cost</p>
+				</section>
+				<section>
+					<video height="450" controls>
+						<source data-src="images/decay.mp4" type="video/mp4" />
+					</video>
+					<p>Decaying homogeneous isotropic turbulence in a box; $\overline{u}_i = 0$, $\overline{u_x^\prime u_x^\prime} = \overline{u_y^\prime u_y^\prime} = \overline{u_z^\prime u_z^\prime}$, fluctuations uncorrelated.</p>
+				</section>
+				<section>
+					<p>How to verify Kolmogorov's hypotheses experimentally?</p>
+					<p>$\rightarrow$ Taylor hypothesis $\partial_t(\dots) = \overline{u}\partial_x(\dots)$</p>
 				</section>
 			</section>
 			<section>
