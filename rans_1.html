@@ -52,21 +52,185 @@
 			<section>
 				<h3>Outline</h3>
 				<ul>
-					<li>topic 1</li>
-					<li>topic 2</li>
+					<li>RANS model overview</li>
+					<li>eddy viscosity hypothesis</li>
+					<li>mixing length model</li>
 				</ul>
 			</section>
 			<section>
 				<section>
-					<h3>topic 1</h3>
+					<h3>RANS model overview</h3>
+				</section>
+				<section>
+					<p>model categories</p>
+					<ol>
+						<li>eddy viscosity models
+							<ol>
+								<li>linear, algebraic</li>
+								<li>linear, PDE-based</li>
+								<li>non-linear, PDE-based</li>
+							</ol>
+						</li>
+						<li>stress models
+							<ol>
+								<li>algebraic (3 PDEs)</li>
+								<li>Reynolds stresses (7 PDEs)</li>
+							</ol>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<p>historical perspective I</p>
+					<ul>
+						<li><span style="color: #bd1e3b;">1877:</span> Boussinesq hypothesis (eddy viscosity)<br>
+							<a href="https://hal.science/hal-00264386/document">Essay on the theory of running water</a>
+						</li>
+						<li><span style="color: #bd1e3b;">1894:</span> Reynolds decomposition<br>
+							<a href="https://en.wikipedia.org/wiki/Osborne_Reynolds">On the dynamical theory of incompressible viscous fluids and the determination of the criterion</a>
+						</li>
+						<li><span style="color: #bd1e3b;">1925:</span> Prandtl's mixing length<br>
+							<a href="https://en.wikipedia.org/wiki/Mixing_length_model">Report on the studies of developed turbulence</a>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>eddy viscosity hypothesis</h3>
+				</section>
+				<section>
+					<p>RANS equation (momentum)</p>
+					<p><small>
+						$$
+						\partial_t \overline{\mathbf{u}} + \nabla\cdot (\overline{\mathbf{u}}\overline{\mathbf{u}}) = -\nabla \overline{p} + \nabla\cdot \left(\nu \left(\nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T \right)  - \overline{\mathbf{u}^\prime\mathbf{u}^\prime}\right)
+						$$
+					</small></p>
+					<p>assumptions: incompressible, const. density, Newtonian fluid</p>
+				</section>
+				<section>
+					<p>mean strain rate tensor $$2\mathbf{S} = \nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T$$</p>
+					<p>Reynolds stress tensor $$\mathbf{R} = - \overline{\mathbf{u}^\prime\mathbf{u}^\prime}$$</p>
+					<p>turbulence kinetic energy $$2k=-\mathrm{tr}(\mathbf{R})$$</p>
+				</section>
+				<section>
+					<p>observations</p>
+					<ul>
+						<li>increased loss/dissipation in turbulent flows</li>
+						<li>turbulent stresses increase as the mean rate of deformation increases</li>
+					</ul>
+					<p>$\rightarrow$ Boussinesq (1877): Reynolds stress might be proportional to mean rate of deformation</p>
+				</section>
+				<section>
+					<p>first trial</p>
+					<p>$$\mathbf{R}=-\overline{\mathbf{u}^\prime\mathbf{u}^\prime} = \nu_t 2\mathbf{S} = \nu_t \left(\nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T\right)$$</p>
+					<p>$\nu_t$ - turbulent (eddy) viscosity</p>
+					<p style="color: #bd1e3b;">Issues?</p>
+				</section>
+				<section>
 					<p>
-						$$ a \in \mathbb{R}^{N\times M} $$
+						$$
+						\mathbf{R} = \underbrace{-\overline{\mathbf{u}^\prime\mathbf{u}^\prime} + \frac{2}{3} k \mathbf{I}}_{\mathbf{R}_{dev}} - \underbrace{\frac{2}{3} k \mathbf{I}}_{\text{isotropic}}
+						$$
 					</p>
+					<p>
+						$$
+						\mathbf{R}_{dev} = \nu_t 2 \mathbf{S} = \nu_t\left(\nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T\right)
+						$$
+					</p>
+					<p>
+						$$
+						\mathbf{R} = \nu_t 2 \mathbf{S} - \frac{2}{3} k \mathbf{I}
+						$$
+					</p>
+				</section>
+				<section>
+					<p>Which implicit assumption about $\nu_t$ have we made?</p>
+				</section>
+				<section>
+					<p>
+						$$
+						D_t\overline{u} = -\nabla \overline{p} + \nabla\cdot \left(\nu 2 \mathbf{S}  + \nu_t 2 \mathbf{S}-\frac{2}{3}k\mathbf{I}\right)
+						$$
+						$$
+						D_t\overline{u} = -\nabla \tilde{\overline{p}} + \nabla\cdot \left(\nu_{eff} \left(\nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T \right)\right)
+						$$
+					</p>
+					<p>with $\tilde{\overline{p}} = \overline{p}+\frac{2}{3}k$ and $\nu_{eff} = \nu + \nu_t$</p>
+				</section>
+				<section>
+					<p>passive scalar $\varphi$</p>
+					<p>
+						$$
+							-\overline{u_i^\prime\varphi^\prime} = \Gamma_t \partial_i \overline{\varphi}
+						$$
+					</p>
+					<p>$\Gamma_t$ - turbulent/eddy diffusivity</p>
+				</section>
+				<section>
+					<p>
+						$$
+						\partial_t \overline{\varphi} + \nabla\cdot (\overline{\mathbf{u}}\overline{\varphi}) = \nabla \cdot (\Gamma_{eff}\nabla \varphi)
+						$$
+					</p>
+					<p>$\Gamma_{eff} = \Gamma + \Gamma_t$ - effective diffusivity</p>
+				</section>
+				<section>
+					<p>equivalence to molecular heat/mass transport</p>
+					<p>$Sc = \nu/D$ and $Pr = \nu/\alpha$</p>
+					<p>
+						$$
+						\sigma_t = \nu_t / \Gamma_t
+						$$
+					</p>
+					<p>$\sigma_t$ - turbulent Schmidt/Prandtl number; around unity</p>
+				</section>
+				<section>
+					<p>How to determine $\nu_t$?</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Prandtl's mixing length model</h3>
+				</section>
+				<section>
+					<p>How do Reynolds stresses contribute to the mean momentum balance in a shear flow?</p>
+				</section>
+				<section>
+					<p>Prandtl's mixing length model (1925)</p>
+					<p>
+						$$ \nu_t = l_m^2 |\partial_y \overline{u}_x | $$
+					</p>
+					<p>Reynolds shear stress for shear layer</p>
+					<p>
+						$$
+						R_{xy} = \nu_t \partial_y \overline{u}_x = l_m^2 |\partial_y \overline{u}_x | \partial_y \overline{u}_x
+						$$
+					</p>
+				</section>
+				<section>
+					<p>short comings</p>
+					<ul>
+						<li>not general (e.g., 2D, shear layer)</li>
+						<li>case-dependent mixing length $l_m$</li>
+					</ul>
+				</section>
+				<section>
+					<p>other algebraic eddy viscosity models</p>
+					<ul>
+						<li>Cebeci-Smith model (1967)</li>
+						<li>Baldwin-Lomax model (1978)</li>
+					</ul>
+					<p>distinction between inner and outer layer near walls; slightly more general; rarely used in practice nowadays; <a href="https://www.cfd-online.com/Wiki/Algebraic_turbulence_models">read more</a></p>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h3>summary</h3>
+					<ul>
+						<li>Boussinesq: deviatoric part of turbulent stresses is proportional to mean strain rate</li>
+						<li>eddy viscosity is isotropic (the same for all directions); often violated but not always critical</li>
+						<li>Prandtl's mixing length approximation converts local unknown (eddy viscosity) into flow type dependent unknown (mixing length); basis for more advanced models</li>
+					</ul>
 				</section>
 			</section>
 		</div>
