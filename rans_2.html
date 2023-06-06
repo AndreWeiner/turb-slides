@@ -23,7 +23,7 @@
 		<div class="slides">
 			<section>
 				<h4>Fundamentals of turbulence modeling</h4>
-				<h3><span style="color: #bd1e3b">RANS models I</span></h3>
+				<h3><span style="color: #bd1e3b">RANS models II</span></h3>
 				<div class="r-hstack">
 					<img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="CC" style="padding-right: 0.5em;">
 					<a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
@@ -53,8 +53,9 @@
 				<h3>Outline</h3>
 				<ul>
 					<li>RANS model overview</li>
-					<li>eddy viscosity hypothesis</li>
-					<li>mixing length model</li>
+					<li>$k$-$\varepsilon$ model</li>
+					<li>$k$-$\omega$ model</li>
+					<li>$k$-$\omega$-SST model</li>
 				</ul>
 			</section>
 			<section>
@@ -67,7 +68,7 @@
 						<li>eddy viscosity models
 							<ol>
 								<li>linear, algebraic</li>
-								<li>linear, PDE-based</li>
+								<li style="color: #bd1e3b;">linear, PDE-based</li>
 								<li>non-linear, PDE-based</li>
 							</ol>
 						</li>
@@ -80,156 +81,140 @@
 					</ol>
 				</section>
 				<section>
-					<p>historical perspective I</p>
+					<p>historical perspective II</p>
 					<ul>
-						<li><span style="color: #bd1e3b;">1877:</span> Boussinesq hypothesis (eddy viscosity)<br>
-							<a href="https://hal.science/hal-00264386/document">Essay on the theory of running water</a>
+						<li><span style="color: #bd1e3b;">1974:</span> $k$-$\varepsilon$ model<br>
+							<a href="https://www.cfd-online.com/Wiki/K-epsilon_models">B. E. Launder, B. I. Sharma</a>
 						</li>
-						<li><span style="color: #bd1e3b;">1894:</span> Reynolds decomposition<br>
-							<a href="https://en.wikipedia.org/wiki/Osborne_Reynolds">On the dynamical theory of incompressible viscous fluids and the determination of the criterion</a>
+						<li><span style="color: #bd1e3b;">1988:</span> $k$-$\omega$ model<br>
+							<a href="https://www.cfd-online.com/Wiki/Wilcox%27s_k-omega_model">D. C. Wilcox</a>
 						</li>
-						<li><span style="color: #bd1e3b;">1925:</span> Prandtl's mixing length<br>
-							<a href="https://en.wikipedia.org/wiki/Mixing_length_model">Report on the studies of developed turbulence</a>
+						<li><span style="color: #bd1e3b;">1992:</span> Spalart-Allmaras model<br>
+							<a href="https://www.cfd-online.com/Wiki/Spalart-Allmaras_model">P. R. Splart, S. R. Allmaras</a>
+						</li>
+						<li><span style="color: #bd1e3b;">1994:</span> $k$-$\omega$-SST model<br>
+							<a href="https://www.cfd-online.com/Wiki/SST_k-omega_model">F. R. Menter</a>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section>
 				<section>
-					<h3>eddy viscosity hypothesis</h3>
+					<h3>$k$-$\varepsilon$ model</h3>
 				</section>
 				<section>
-					<p>RANS equation (momentum)</p>
-					<p><small>
-						$$
-						\partial_t \overline{\mathbf{u}} + \nabla\cdot (\overline{\mathbf{u}}\overline{\mathbf{u}}) = -\nabla \overline{p} + \nabla\cdot \left(\nu \left(\nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T \right)  - \overline{\mathbf{u}^\prime\mathbf{u}^\prime}\right)
-						$$
-					</small></p>
-					<p>assumptions: incompressible, const. density, Newtonian fluid</p>
+					<p>transport equation of (specific) turbulence kinetic energy</p>
+					<ol>
+						<li>trace of Reynolds stress transport equation</li>
+						<li>multiplication of Navier-Stokes and RANS equations and with velocity fluctuations; summation of components; subtraction; rearrangement</li>
+					</ol>
 				</section>
 				<section>
-					<p>mean strain rate tensor $$2\mathbf{S} = \nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T$$</p>
-					<p>Reynolds stress tensor $$\mathbf{R} = - \overline{\mathbf{u}^\prime\mathbf{u}^\prime}$$</p>
-					<p>turbulence kinetic energy $$2k=-\mathrm{tr}(\mathbf{R})$$</p>
+					<p>starting point</p>
+					<p>$$\nu_t \propto l_c u_c$$</p>
+					<p>velocity scale $u_c = k^{0.5}$</p>
+					<p>length scale $l_c = k^{1.5}/\varepsilon$</p>
+					<p>$\rightarrow \nu_t = C_\mu k^2/\varepsilon$</p>
 				</section>
 				<section>
-					<p>observations</p>
+					<p>additional modeling</p>
 					<ul>
-						<li>increased loss/dissipation in turbulent flows</li>
-						<li>turbulent stresses increase as the mean rate of deformation increases</li>
+						<li>$k$ equation terms</li>
+						<li>$\varepsilon$ transport equations and terms</li>
 					</ul>
-					<p>$\rightarrow$ Boussinesq (1877): Reynolds stress might be proportional to mean rate of deformation</p>
 				</section>
 				<section>
-					<p>first trial</p>
-					<p>$$\mathbf{R}=-\overline{\mathbf{u}^\prime\mathbf{u}^\prime} = \nu_t 2\mathbf{S} = \nu_t \left(\nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T\right)$$</p>
-					<p>$\nu_t$ - turbulent (eddy) viscosity</p>
-					<p style="color: #bd1e3b;">Issues?</p>
+					<p>boundary conditions (high $Re$)</p>
+					<ul>
+						<li>$\nu_t$ - log-law, Spalding's function</li>
+						<li>$k$ - <a href="https://www.openfoam.com/documentation/guides/v2112/doc/guide-bcs-wall-turbulence-kqRWallFunction.html">zero gradient</a> ($\nabla k \cdot \mathbf{n}=0$)</li>
+						<li>$\varepsilon$ - <a href="https://www.openfoam.com/documentation/guides/v2112/doc/guide-bcs-wall-turbulence-kqRWallFunction.html">fixed value</a> ($\varepsilon_{log} = C_\mu k^{1.5}/\nu_t$)</li>
+					</ul>
 				</section>
 				<section>
-					<p>
-						$$
-						\mathbf{R} = \underbrace{-\overline{\mathbf{u}^\prime\mathbf{u}^\prime} + \frac{2}{3} k \mathbf{I}}_{\mathbf{R}_{dev}} - \underbrace{\frac{2}{3} k \mathbf{I}}_{\text{isotropic}}
-						$$
-					</p>
-					<p>
-						$$
-						\mathbf{R}_{dev} = \nu_t 2 \mathbf{S} = \nu_t\left(\nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T\right)
-						$$
-					</p>
-					<p>
-						$$
-						\mathbf{R} = \nu_t 2 \mathbf{S} - \frac{2}{3} k \mathbf{I}
-						$$
-					</p>
+					<p>inlet conditions</p>
+					<ul>
+						<li>ideally from experiments</li>
+						<li>estimate $k = 1.5 (IU_{in})^2$</li>
+						<li>estimate $\varepsilon = C_\mu^{0.75}k^{1.5}/l_c$</li>
+					</ul>
 				</section>
 				<section>
-					<p>Which implicit assumption about $\nu_t$ have we made?</p>
+					<p>favorable attributes</p>
+					<ul>
+						<li>simple and numerically robust</li>
+						<li>only free stream conditions needed</li>
+						<li>good accuracy in many cases</li>
+						<li>extensively validated</li>
+					</ul>
 				</section>
 				<section>
-					<p>
-						$$
-						D_t\overline{u} = -\nabla \overline{p} + \nabla\cdot \left(\nu 2 \mathbf{S}  + \nu_t 2 \mathbf{S}-\frac{2}{3}k\mathbf{I}\right)
-						$$
-						$$
-						D_t\overline{u} = -\nabla \tilde{\overline{p}} + \nabla\cdot \left(\nu_{eff} \left(\nabla\overline{\mathbf{u}}+\nabla\overline{\mathbf{u}}^T \right)\right)
-						$$
-					</p>
-					<p>with $\tilde{\overline{p}} = \overline{p}+\frac{2}{3}k$ and $\nu_{eff} = \nu + \nu_t$</p>
-				</section>
-				<section>
-					<p>passive scalar $\varphi$</p>
-					<p>
-						$$
-							-\overline{u_i^\prime\varphi^\prime} = \Gamma_t \partial_i \overline{\varphi}
-						$$
-					</p>
-					<p>$\Gamma_t$ - turbulent/eddy diffusivity</p>
-				</section>
-				<section>
-					<p>
-						$$
-						\partial_t \overline{\varphi} + \nabla\cdot (\overline{\mathbf{u}}\overline{\varphi}) = \nabla \cdot (\Gamma_{eff}\nabla \overline{\varphi})
-						$$
-					</p>
-					<p>$\Gamma_{eff} = \Gamma + \Gamma_t$ - effective diffusivity</p>
-				</section>
-				<section>
-					<p>equivalence to molecular heat/mass transport</p>
-					<p>$Sc = \nu/D$ and $Pr = \nu/\alpha$</p>
-					<p>
-						$$
-						\sigma_t = \nu_t / \Gamma_t
-						$$
-					</p>
-					<p>$\sigma_t$ - turbulent Schmidt/Prandtl number; around unity</p>
-				</section>
-				<section>
-					<p>How to determine $\nu_t$?</p>
+					<p>bad performance in certain flows</p>
+					<ul>
+						<li>flows in which wall functions are not applicable</li>
+						<li>unconfined flows (jet)</li>
+						<li>flows with large extra strain (curved boundaries, swirls - think tornados)</li>
+						<li>rotating flows (fans, turbo machinery)</li>
+						<li>flows driven by anisotropy of Reynolds stresses (fully developed flows in square duct)</li>
+					</ul>
 				</section>
 			</section>
 			<section>
 				<section>
-					<h3>Prandtl's mixing length model</h3>
+					<h3>$k$-$\omega$ model</h3>
 				</section>
 				<section>
-					<p>How do Reynolds stresses contribute to the mean momentum balance in a shear flow?</p>
+					<p>starting point</p>
+					<p>$$\nu_t \propto l_c u_c$$</p>
+					<p>velocity scale $u_c = k^{0.5}$</p>
+					<p>turbulence frequency $\omega = \varepsilon / k$</p>
+					<p>length scale $l_c = k^{0.5}/\omega$</p>
+					<p>$\rightarrow \nu_t = k/\omega$</p>
 				</section>
 				<section>
-					<p>Prandtl's mixing length model (1925)</p>
-					<p>
-						$$ \nu_t = l_m^2 |\partial_y \overline{u}_x | $$
-					</p>
-					<p>Reynolds shear stress for shear layer</p>
-					<p>
-						$$
-						R_{xy} = \nu_t \partial_y \overline{u}_x = l_m^2 |\partial_y \overline{u}_x | \partial_y \overline{u}_x
-						$$
-					</p>
-				</section>
-				<section>
-					<p>short comings</p>
+					<p>favorable attributes</p>
 					<ul>
-						<li>not general (e.g., 2D, shear layer)</li>
-						<li>case-dependent mixing length $l_m$</li>
+						<li>similar to $k$-$\varepsilon$ model</li>
+						<li>integration of wall layer possible</li>
 					</ul>
 				</section>
 				<section>
-					<p>other algebraic eddy viscosity models</p>
+					<p>unfavorable attributes</p>
 					<ul>
-						<li>Cebeci-Smith model (1967)</li>
-						<li>Baldwin-Lomax model (1978)</li>
+						<li>similar weaknesses as $k$-$\varepsilon$ model</li>
+						<li>sensitivity to free stream values</li>
 					</ul>
-					<p>distinction between inner and outer layer near walls; slightly more general; rarely used in practice nowadays; <a href="https://www.cfd-online.com/Wiki/Algebraic_turbulence_models">read more</a></p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>$k$-$\omega$-SST model</h3>
+				</section>
+				<section>
+					<p>starting point $\nu_t = k/\omega$</p>
+					<p>observation: plugging definition of $\varepsilon = k\omega$ into transport equation of $\varepsilon$ yields $\omega$ transport equation with additional terms</p>
+					<p>idea: combine favorable attributes of both models</p>
+				</section>
+				<section>
+					<p>favorable attributes</p>
+					<ul>
+						<li>combines the best of $k$-$\varepsilon$ and $k$-$\omega$ models</li>
+						<li>very well validated</li>
+					</ul>
+					<p>$\rightarrow$ default model of most practitioners</p>
+				</section>
+				<section>
+					<p>unfavorable attributes in certain flows remain</p>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h3>summary</h3>
 					<ul>
-						<li>Boussinesq: deviatoric part of turbulent stresses is proportional to mean strain rate</li>
-						<li>eddy viscosity is isotropic (the same for all directions); often violated but not always critical</li>
-						<li>Prandtl's mixing length approximation converts local unknown (eddy viscosity) into flow type dependent unknown (mixing length); basis for more advanced models</li>
+						<li>based on mixing length idea</li>
+						<li>mostly empirical modeling of transport equations</li>
+						<li>many weaknesses related to assumption of isotropic eddy viscosity</li>
+						<li>many variants exist $\rightarrow$ check implementation and/or documentation before usage</li>
 					</ul>
 				</section>
 			</section>
