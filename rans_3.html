@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>The finite volume method</title>
+	<title>RANS models</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
@@ -23,7 +23,7 @@
 		<div class="slides">
 			<section>
 				<h4>Fundamentals of turbulence modeling</h4>
-				<h3><span style="color: #bd1e3b">finite volume method</span></h3>
+				<h3><span style="color: #bd1e3b">RANS models III</span></h3>
 				<div class="r-hstack">
 					<img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="CC" style="padding-right: 0.5em;">
 					<a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
@@ -52,46 +52,124 @@
 			<section>
 				<h3>Outline</h3>
 				<ul>
-					<li>mathematical model</li>
-					<li>domain discretization</li>
-					<li>equation discretization</li>
-					<li>solving the linear system</li>
-					<li>pressure-velocity-coupling</li>
+					<li>RANS model overview</li>
+					<li>Reynolds stress models</li>
+					<li>non-linear eddy viscosity models</li>
 				</ul>
 			</section>
 			<section>
 				<section>
-					<h3>mathematical model</h3>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>domain discretization</h3>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>equation discretization</h3>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>solving the linear system</h3>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>pressure-velocity-coupling</h3>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>summary</h3>
+					<h3>RANS model overview</h3>
 				</section>
 				<section>
+					<p>model categories</p>
+					<ol>
+						<li>eddy viscosity models
+							<ol>
+								<li>linear, algebraic</li>
+								<li>linear, PDE-based</li>
+								<li style="color: #bd1e3b;">non-linear, PDE-based</li>
+							</ol>
+						</li>
+						<li>stress models
+							<ol>
+								<li>algebraic (3 PDEs)</li>
+								<li style="color: #bd1e3b;">Reynolds stresses (7 PDEs)</li>
+							</ol>
+						</li>
+					</ol>
+				</section>
+				<section>
+					<p>historical perspective III</p>
 					<ul>
-						<li>FVM in OpenFOAM typically 2nd order</li>
-						<li>lowest order of approximation decisive</li>
+						<li><span style="color: #bd1e3b;">1975:</span> Launder-Reece-Rodi (LLR) RSM<br>
+							<a href="https://www.cfd-online.com/Wiki/Reynolds_stress_model_(RSM)">B. E. Launder, J. G. Reece, W. Rodi</a>
+						</li>
+						<li><span style="color: #bd1e3b;">1991:</span> Speziale-Sarker-Gatski (SSG) RSM<br>
+							<a href="https://www.cfd-online.com/Wiki/Reynolds_stress_model_(RSM)">C. G. Speziale, S. Sarkar, T. B. Gatski</a>
+						</li>
+						<li><span style="color: #bd1e3b;">1996:</span> Lien-Cubic $k$-$\varepsilon$ model<br>
+							<a href="https://www.sciencedirect.com/science/article/abs/pii/B9780444824639500150?via%3Dihub">F. S. Lien, W. L. Chen, M. A. Leschziner</a>
+						</li>
+						<li>...</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Reynolds stress models (RSM)</h3>
+				</section>
+				<section>
+					<p>approach to derive equations (Wilcox p. 41)</p>
+					<p>
+						$$ \overline{u^\prime_i N(u_j) + u^\prime_j N(u_i)} = 0$$
+					</p>
+					<p>
+						$$N(u_i) = \partial_t u_j + \partial_i (u_iu_j) + \partial_j p - \partial_i (\nu (\partial_i u_j + \partial_j u_i)) = 0$$
+					</p>
+				</section>
+				<section>
+					<p>favorable attributes</p>
+					<ul>
+						<li>improved performance in some flows</li>
+						<li>most general RANS models</li>
+					</ul>
+				</section>
+				<section>
+					<p>unfavorable attributes</p>
+					<ul>
+						<li>additional cost (7 PDEs)</li>
+						<li>less validated than eddy viscosity models</li>
+						<li>issues due to $\varepsilon$ equation</li>
+						<li>numerical robustness</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>non-linear eddy viscosity models</h3>
+				</section>
+				<section>
+					<p>viscoelastic analogy</p>
+					<p>$$\overline{u_i^\prime u_j^\prime} = f(\overline{S}_{ij}, k, \varepsilon, \dots)$$</p>
+					<p>$$\overline{u_i^\prime u_j^\prime} = f(\overline{S}_{ij}, D_t\overline{S}_{ij}, k, \varepsilon, \dots)$$</p>
+					<p>modeling guided by concepts of <span style="color: #bd1e3b;">frame invariance</span> and <span style="color: #bd1e3b;">realizability</span></p>
+				</section>
+				<section>
+					<p>generalized eddy viscosity hypothesis</p>
+					<p>
+						$$
+						\begin{aligned}
+						-\overline{u_i^\prime u_j^\prime} &= 2\nu_t \overline{S}_{ij} - \frac{2}{3} k \delta_{ij}\\
+						&- C_1\nu_t \frac{k}{\varepsilon}(\overline{S}_{ik}\overline{S}_{kj}-\frac{1}{3}\overline{S}_{kl}\overline{S}_{kl}\delta_{ij})\\
+						&- ...
+						\end{aligned}
+						$$
+					</p>
+					<p>quadratic and cubic expansions available</p>
+				</section>
+				<section>
+					<p>favorable attributes</p>
+					<ul>
+						<li>improved performance in some flows</li>
+						<li>less expensive than RSM (2-3 PDEs)</li>
+					</ul>
+					<p>unfavorable attributes</p>
+					<ul>
+						<li>less validated (potential calibration necessary)</li>
+						<li>not always better than linear counterparts</li>
+						<li>stability issues</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>summary RANS models</h3>
+					<ul>
+						<li>zoo of linear, non-linear, Reynolds stress models</li>
+						<li>model complexity tends to cost numerical stability</li>
+						<li>standard for high $Re$ flows (think full aircraft)</li>
+						<li>starting point for moderate $Re$ investigations</li>
 					</ul>
 				</section>
 			</section>
