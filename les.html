@@ -52,16 +52,103 @@
 			<section>
 				<h3>Outline</h3>
 				<ul>
-					<li>topic 1</li>
-					<li>topic 2</li>
+					<li>LES idea and overview</li>
+					<li>filtered equations</li><hr>
+					<li>subgrid scale models</li>
+					<li>boundary conditions</li>
 				</ul>
 			</section>
 			<section>
 				<section>
-					<h3>topic 1</h3>
+					<h3>LES idea and overview</h3>
+				</section>
+				<section>
+					<p>properties of turbulent scales</p>
+					<div class="r-hstack items-end justify-around">
+						<p style="margin-bottom: 10em;">large scales</p>
+						<p style="margin-bottom: 10em;">small scales</p>
+					</div>
+				</section>
+				<section>
+					<p><span style="color: #bd1e3b;">LES core idea: </span> resolve large structures and model influence of smallest structures</p>
+				</section>
+				<section>
+					<p>How is the turbulence kinetic energy affected?</p>
+				</section>
+				<section>
+					<p>topics in LES modeling</p>
+					<ul>
+						<li>filtering in complex domains</li>
+						<li>subgrid scale models</li>
+						<li>supergrid models</li>
+						<li>wall/hybrid models</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>filtered equations</h3>
+				</section>
+				<section>
+					<p>filtering in 3D, no boundaries</p>
 					<p>
-						$$ a \in \mathbb{R}^{N\times M} $$
+						$$
+							\widetilde{\varphi} (\mathbf{x}) = \int_{\mathbb{R}^3} G(\mathbf{x}, \mathbf{y}, \Delta (\mathbf{x}))\ \varphi (\mathbf{x}) \mathrm{d}\mathbf{y}
+						$$
 					</p>
+					<p>
+						$$
+							\int_{\mathbb{R}^3} G(\mathbf{x}, \mathbf{y}, \Delta (\mathbf{x})) \mathrm{d}\mathbf{y} = 1
+						$$
+					</p>
+					<p>$\Delta $ - filter width, $G$ - filter function</p>
+				</section>
+				<section>
+					<p>3D expressed as 1D filtering</p>
+					<p>
+						$$
+						G(\mathbf{x}, \mathbf{y}, \Delta (\mathbf{x})) = \prod_{i=x,y,z} G_i(x_i, y_i, \Delta_i (x_i))
+						$$
+					</p>
+				</section>
+				<section>
+					<p>typical filters for theoretical analysis</p>
+					<ul>
+						<li>box filter</li>
+						<li>Fourier cut-off</li>
+						<li>Gauß</li>
+					</ul>
+				</section>
+				<section>
+					<p>some mathematical properties of filtering</p>
+					<ul>
+						<li>$\widetilde{\varphi + \psi} = \widetilde{\varphi} + \widetilde{\psi}$</li>
+						<li>$\widetilde{\partial_i \varphi} = \partial_i \widetilde{\varphi}$</li>
+						<li>$\widetilde{\widetilde{\varphi}} \neq \widetilde{\varphi}$</li>
+						<li>$\widetilde{\psi\widetilde{\varphi}} \neq  \widetilde{\psi} \widetilde{\varphi}$</li>
+						<li>$\widetilde{\varphi^\prime}\neq 0$</li>
+					</ul>
+				</section>
+				<section>
+					<p>derivation of filtered momentum and mass conservation equation</p>
+				</section>
+				<section>
+					<p>further aspects</p>
+					<ul>
+						<li>inhomogeneous filters</li>
+						<li>finite domains</li>
+						<li>filtering by discretization</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>subgrid scale models</h3>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>boundary conditions</h3>
 				</section>
 			</section>
 			<section>
