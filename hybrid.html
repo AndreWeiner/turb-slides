@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Hybrid RANS-LES methods</title>
+	<title>Wall-modeled LES and DES</title>
 
 	<link rel="stylesheet" href="dist/reset.css">
 	<link rel="stylesheet" href="dist/reveal.css">
@@ -23,7 +23,7 @@
 		<div class="slides">
 			<section>
 				<h4>Fundamentals of turbulence modeling</h4>
-				<h3><span style="color: #bd1e3b">Hybrid RANS-LES</span></h3>
+				<h3><span style="color: #bd1e3b">Wall-modeled LES and DES</span></h3>
 				<div class="r-hstack">
 					<img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="CC" style="padding-right: 0.5em;">
 					<a href="http://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
@@ -52,21 +52,88 @@
 			<section>
 				<h3>Outline</h3>
 				<ul>
-					<li>topic 1</li>
-					<li>topic 2</li>
+					<li>division into inner and outer zone</li>
+					<li>LES with wall-functions</li>
+					<li>detached eddy simulation (DES)</li>
 				</ul>
 			</section>
 			<section>
 				<section>
-					<h3>topic 1</h3>
-					<p>
-						$$ a \in \mathbb{R}^{N\times M} $$
-					</p>
+					<h3>division into inner and outer zone</h3>
+				</section>
+				<section>
+					<p>resolution requirements DNS (lecture 5)</p>
+					<p>$$t_{CPU,DNS}\propto Re^{9/4} = Re^{2.75}$$</p>
+					<p><span style="color: #bd1e3b;">observation:</span> resolution requirements typically not homogeneous for flows with boundary layers</p>
+				</section>
+				<section>
+					<p><span style="color: #bd1e3b;">idea I:</span> refined resolution estimate based on division into inner and outer region</p>
+				</section>
+				<section>
+					<p><span style="color: #bd1e3b;">idea II:</span> reduce computational cost by modelling of inner region</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>LES with wall-functions</h3>
+				</section>
+				<section>
+					<p>concept of wall-functions</p>
+					<ol>
+						<li>employ default LES over entire domain</li>
+						<li>correct wall shear stress $\tau_w$ based on<br> simplified laws (e.g., logarithmic law)</li>
+					</ol>
+					<p>$\rightarrow \tau_w$ main source of error</p>
+				</section>
+				<section>
+					<p>some (rough) guidelines for meshing</p>
+					<ul>
+						<li>$30 < y^+ < 200$, $x^+\approx z^+ < 100$</li>
+						<li>cell expansion ratio less than $10\%$</li>
+					</ul>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>detached eddy simulation</h3>
+				</section>
+				<section>
+					<span style="color: #bd1e3b;">idea:</span> resolve "detached" eddies (separated flow) using LES and model near-wall region using RANS</p>
+				</section>
+				<section>
+					<p>some DES variants</p>
+					<ul>
+						<li>zonal DES (ZDES):<br>user-defined division intro LES/RANS zones</li>
+						<li>automated ZDES (ZDES):<br>user-defined division intro LES/RANS zones simplified by precursor RANS simulation</li>
+						<li>DES97:<br>originally proposed DES; automatic division at runtime</li>
+					</ul>
+				</section>
+				<section>
+					<p>even more variants</p>
+					<ul>
+						<li>delayed DES (DDES):<br>DES without grid-induced separation (GIS)</li>
+						<li>improved DDES (IDDES):<br>possible switching between DDES and wall-modelled LES; improves log-layer mismatch</li>
+					</ul>
+				</section>
+				<section>
+					<p>some (rough) guidelines for meshing</p>
+					<ul>
+						<li>$30 < y^+ < 200$ for (RANS) wall-functions </li>
+						<li>$y^+ < 1$ without wall-functions</li>
+						<li>no restrictions on $x^+$, $z^+$</li>
+						<li>cell expansion ratio less than $10\%$</li>
+					</ul>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h3>summary</h3>
+					<ul>
+						<li>modelling of inner region reduces computational costs significantly</li>
+						<li>WMLES: combination of LES and wall model</li>
+						<li>DES: hybrid method with RANS region near the wall and LES for separated flow</li>
+						<li>$t_{LES} > t_{WMLES} > t_{DES}$</li>
+					</ul>
 				</section>
 			</section>
 		</div>
